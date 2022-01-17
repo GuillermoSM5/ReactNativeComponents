@@ -1,8 +1,9 @@
-import React, {FunctionComponent, useState} from 'react';
+import React, {FunctionComponent, useContext, useState} from 'react';
 import {ActivityIndicator, Image, StyleSheet, Text, View} from 'react-native';
 import {FlatList} from 'react-native-gesture-handler';
 import FadeInImage from '../Components/FadeInImage';
 import HeaderTitle from '../Components/HeaderTitle';
+import {ThemeContext} from '../Context/themeContext/ThemeContext';
 
 interface InfiniteScrollScreenProps {}
 
@@ -10,6 +11,9 @@ const InfiniteScrollScreen: FunctionComponent<
   InfiniteScrollScreenProps
 > = () => {
   const [numbers, setNumbers] = useState([0, 1, 2, 3, 4, 5]);
+  const {
+    theme: {colors},
+  } = useContext(ThemeContext);
 
   const loadMore = () => {
     const newArray: number[] = [];
@@ -59,7 +63,7 @@ const InfiniteScrollScreen: FunctionComponent<
               justifyContent: 'center',
               alignItems: 'center',
             }}>
-            <ActivityIndicator size={20} color="#5856D6" />
+            <ActivityIndicator size={20} color={colors.primary} />
           </View>
         )}
       />

@@ -1,10 +1,14 @@
-import React, {FunctionComponent, useRef} from 'react';
+import React, {FunctionComponent, useContext, useRef} from 'react';
 import {StyleSheet, View, Animated, PanResponder} from 'react-native';
+import {ThemeContext} from '../Context/themeContext/ThemeContext';
 
 interface Animation102ScreenProps {}
 
 const Animation102Screen: FunctionComponent<Animation102ScreenProps> = () => {
   const pan = useRef(new Animated.ValueXY()).current;
+  const {
+    theme: {colors},
+  } = useContext(ThemeContext);
 
   const panResponse = PanResponder.create({
     onStartShouldSetPanResponder: () => true,
@@ -32,7 +36,10 @@ const Animation102Screen: FunctionComponent<Animation102ScreenProps> = () => {
     <View style={styles.container}>
       <Animated.View
         {...panResponse.panHandlers}
-        style={[pan.getLayout(), styles.pupleBox]}
+        style={[
+          pan.getLayout(),
+          {...styles.pupleBox, backgroundColor: colors.primary},
+        ]}
       />
     </View>
   );
@@ -47,7 +54,6 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   pupleBox: {
-    backgroundColor: '#548CFF',
     width: 150,
     height: 150,
     borderRadius: 8,

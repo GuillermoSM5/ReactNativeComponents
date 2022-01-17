@@ -1,7 +1,8 @@
-import React, {FunctionComponent, useState} from 'react';
+import React, {FunctionComponent, useContext, useState} from 'react';
 import {View, ScrollView, RefreshControl, Text} from 'react-native';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
 import HeaderTitle from '../Components/HeaderTitle';
+import {ThemeContext} from '../Context/themeContext/ThemeContext';
 import {styles} from '../Theme/appTheme';
 
 interface PullToRefreshScreenProps {}
@@ -9,7 +10,9 @@ interface PullToRefreshScreenProps {}
 const PullToRefreshScreen: FunctionComponent<PullToRefreshScreenProps> = () => {
   const [refreshing, setRefreshing] = useState(false);
   const [data, setData] = useState<string>();
-
+  const {
+    theme: {colors},
+  } = useContext(ThemeContext);
   const {top} = useSafeAreaInsets();
 
   const onRefresh = () => {
@@ -29,11 +32,12 @@ const PullToRefreshScreen: FunctionComponent<PullToRefreshScreenProps> = () => {
           refreshing={refreshing}
           onRefresh={onRefresh}
           progressViewOffset={10}
-          colors={['white', 'red', 'orange']}
-          style={{backgroundColor: '#5856D6'}}
-          tintColor="white"
+          colors={[colors.primary]}
+          progressBackgroundColor={colors.border}
+          style={{backgroundColor: colors.border}}
+          tintColor={colors.border}
           title="Refreshing"
-          titleColor="white"
+          titleColor={colors.border}
         />
       }>
       <View style={styles.globalMargin}>

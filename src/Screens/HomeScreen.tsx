@@ -53,6 +53,16 @@ const menuItems: MenuItem[] = [
     icon: 'infinite-outline',
     components: 'InfiniteScrollScreen',
   },
+  {
+    name: 'Slide Screen',
+    icon: 'albums-outline',
+    components: 'SlideScreen',
+  },
+  {
+    name: 'Change Theme',
+    icon: 'color-palette-outline',
+    components: 'ChangeThemeScreen',
+  },
 ];
 
 const HomeScreen = () => {

@@ -1,11 +1,15 @@
-import React, {FunctionComponent, useState} from 'react';
+import React, {FunctionComponent, useContext, useState} from 'react';
 import {Button, Modal, Text, View} from 'react-native';
 import HeaderTitle from '../Components/HeaderTitle';
+import {ThemeContext} from '../Context/themeContext/ThemeContext';
 import {styles} from '../Theme/appTheme';
 
 interface ModalScreenProps {}
 
 const ModalScreen: FunctionComponent<ModalScreenProps> = () => {
+  const {
+    theme: {colors},
+  } = useContext(ThemeContext);
   const [isVisible, setIsVisible] = useState(false);
   return (
     <View style={styles.globalMargin}>

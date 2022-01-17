@@ -1,10 +1,14 @@
-import React, {FunctionComponent, useRef} from 'react';
+import React, {FunctionComponent, useContext, useRef} from 'react';
 import {Animated, Button, Easing, StyleSheet, View} from 'react-native';
+import {ThemeContext} from '../Context/themeContext/ThemeContext';
 import useAnimation from '../Hooks/useAnimation';
 
 interface Animation101ScreenProps {}
 
 const Animation101Screen: FunctionComponent<Animation101ScreenProps> = () => {
+  const {
+    theme: {colors},
+  } = useContext(ThemeContext);
   const {opacity, position, fadeOut, fadeIn, startMovingPosition} =
     useAnimation();
   return (
@@ -12,6 +16,7 @@ const Animation101Screen: FunctionComponent<Animation101ScreenProps> = () => {
       <Animated.View
         style={{
           ...styles.pupleBox,
+          backgroundColor: colors.primary,
           opacity,
           transform: [{translateY: position}],
         }}
@@ -37,7 +42,6 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   pupleBox: {
-    backgroundColor: '#612897',
     width: 150,
     height: 150,
   },

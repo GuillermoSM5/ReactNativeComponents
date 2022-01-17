@@ -1,7 +1,8 @@
-import React, {FunctionComponent} from 'react';
+import React, {FunctionComponent, useContext} from 'react';
 import {SectionList, Text, View} from 'react-native';
 import HeaderTitle from '../Components/HeaderTitle';
 import ItemSeparator from '../Components/ItemSeparator';
+import {ThemeContext} from '../Context/themeContext/ThemeContext';
 import {styles} from '../Theme/appTheme';
 
 interface CustomSectionListProps {}
@@ -12,6 +13,9 @@ interface Casas {
 }
 
 const CustomSectionList: FunctionComponent<CustomSectionListProps> = () => {
+  const {
+    theme: {colors},
+  } = useContext(ThemeContext);
   const casas: Casas[] = [
     {
       casa: 'DC Comics',
@@ -99,10 +103,12 @@ const CustomSectionList: FunctionComponent<CustomSectionListProps> = () => {
           <HeaderTitle title={'Total de casas: ' + casas.length} />
         )}
         keyExtractor={(item, index) => item + index}
-        renderItem={({item}) => <Text>{item}</Text>}
+        renderItem={({item}) => (
+          <Text style={{color: colors.text}}>{item}</Text>
+        )}
         stickySectionHeadersEnabled
         renderSectionHeader={({section}) => (
-          <View style={{backgroundColor: 'white'}}>
+          <View style={{backgroundColor: colors.background}}>
             <HeaderTitle title={section.casa} />
           </View>
         )}
